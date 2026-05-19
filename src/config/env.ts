@@ -1,0 +1,128 @@
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+function required(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}. Copy .env.example to .env and fill it in.`);
+  }
+  return value;
+}
+
+function optional(name: string, fallback = ''): string {
+  return process.env[name] ?? fallback;
+}
+
+export const env = {
+  // Base URLs (required)
+  IRIS_BASE_URL: required('IRIS_BASE_URL'),
+  IRIS_API_URL: required('IRIS_API_URL'),
+  IRIS_CASE_TOKEN: required('IRIS_CASE_TOKEN'),
+
+  // Role credentials (optional — specs skip when missing)
+  IRIS_SUBJECT_PASSWORD: optional('IRIS_SUBJECT_PASSWORD'),
+  IRIS_JUNIOR_PASSWORD: optional('IRIS_JUNIOR_PASSWORD'),
+  IRIS_SENIOR_PASSWORD: optional('IRIS_SENIOR_PASSWORD'),
+  IRIS_DIRECTOR_PASSWORD: optional('IRIS_DIRECTOR_PASSWORD'),
+
+  // Spec literals — values filled per evaluator environment; not committed.
+  T_AUTH_LITERAL_01: optional('T_AUTH_LITERAL_01'),
+  T_AUTH_LITERAL_02: optional('T_AUTH_LITERAL_02'),
+  T_CMD_LITERAL_01: optional('T_CMD_LITERAL_01'),
+  T_USER_LITERAL_01: optional('T_USER_LITERAL_01'),
+  T_ROLE_LITERAL_01: optional('T_ROLE_LITERAL_01'),
+  T_ROLE_LITERAL_02: optional('T_ROLE_LITERAL_02'),
+  T_ROLE_LITERAL_03: optional('T_ROLE_LITERAL_03'),
+  T_PATH_LITERAL_01: optional('T_PATH_LITERAL_01'),
+  T_PATH_LITERAL_02: optional('T_PATH_LITERAL_02'),
+  T_PATH_LITERAL_03: optional('T_PATH_LITERAL_03'),
+  T_PATH_LITERAL_04: optional('T_PATH_LITERAL_04'),
+  T_PATH_LITERAL_05: optional('T_PATH_LITERAL_05'),
+  T_PATH_LITERAL_06: optional('T_PATH_LITERAL_06'),
+  T_PATH_LITERAL_07: optional('T_PATH_LITERAL_07'),
+  T_PATH_LITERAL_08: optional('T_PATH_LITERAL_08'),
+  T_PATH_LITERAL_09: optional('T_PATH_LITERAL_09'),
+  T_PATH_LITERAL_10: optional('T_PATH_LITERAL_10'),
+  T_PATH_LITERAL_11: optional('T_PATH_LITERAL_11'),
+  T_PATH_LITERAL_12: optional('T_PATH_LITERAL_12'),
+  T_VAL_LITERAL_01: optional('T_VAL_LITERAL_01'),
+  T_VAL_LITERAL_02: optional('T_VAL_LITERAL_02'),
+  T_VAL_LITERAL_03: optional('T_VAL_LITERAL_03'),
+  T_VAL_LITERAL_04: optional('T_VAL_LITERAL_04'),
+  T_DATE_LITERAL_01: optional('T_DATE_LITERAL_01'),
+  T_DATE_LITERAL_02: optional('T_DATE_LITERAL_02'),
+  T_ID_LITERAL_01: optional('T_ID_LITERAL_01'),
+  T_ID_LITERAL_02: optional('T_ID_LITERAL_02'),
+  T_ID_LITERAL_03: optional('T_ID_LITERAL_03'),
+  T_ID_LITERAL_04: optional('T_ID_LITERAL_04'),
+  T_ID_LITERAL_05: optional('T_ID_LITERAL_05'),
+  T_ID_LITERAL_06: optional('T_ID_LITERAL_06'),
+  T_ID_LITERAL_07: optional('T_ID_LITERAL_07'),
+  T_ID_LITERAL_08: optional('T_ID_LITERAL_08'),
+  T_ID_LITERAL_09: optional('T_ID_LITERAL_09'),
+  T_ID_LITERAL_10: optional('T_ID_LITERAL_10'),
+  T_ID_LITERAL_11: optional('T_ID_LITERAL_11'),
+  T_ID_LITERAL_12: optional('T_ID_LITERAL_12'),
+  T_ID_LITERAL_13: optional('T_ID_LITERAL_13'),
+  T_NAME_LITERAL_01: optional('T_NAME_LITERAL_01'),
+  T_NAME_LITERAL_02: optional('T_NAME_LITERAL_02'),
+  T_NAME_LITERAL_03: optional('T_NAME_LITERAL_03'),
+  T_NAME_LITERAL_04: optional('T_NAME_LITERAL_04'),
+  T_NAME_LITERAL_05: optional('T_NAME_LITERAL_05'),
+  T_NAME_LITERAL_06: optional('T_NAME_LITERAL_06'),
+  T_NAME_LITERAL_07: optional('T_NAME_LITERAL_07'),
+  T_NAME_LITERAL_08: optional('T_NAME_LITERAL_08'),
+  T_DOC_LITERAL_01: optional('T_DOC_LITERAL_01'),
+  T_DOC_LITERAL_02: optional('T_DOC_LITERAL_02'),
+  T_DOC_LITERAL_03: optional('T_DOC_LITERAL_03'),
+  T_DOC_LITERAL_04: optional('T_DOC_LITERAL_04'),
+  T_DOC_LITERAL_05: optional('T_DOC_LITERAL_05'),
+  T_DOC_LITERAL_06: optional('T_DOC_LITERAL_06'),
+  T_DOC_LITERAL_07: optional('T_DOC_LITERAL_07'),
+  T_STR_LITERAL_01: optional('T_STR_LITERAL_01'),
+  T_STR_LITERAL_02: optional('T_STR_LITERAL_02'),
+  T_STR_LITERAL_03: optional('T_STR_LITERAL_03'),
+  T_STR_LITERAL_04: optional('T_STR_LITERAL_04'),
+  T_STR_LITERAL_05: optional('T_STR_LITERAL_05'),
+  T_STR_LITERAL_06: optional('T_STR_LITERAL_06'),
+  T_STR_LITERAL_07: optional('T_STR_LITERAL_07'),
+  T_STR_LITERAL_08: optional('T_STR_LITERAL_08'),
+  T_STR_LITERAL_09: optional('T_STR_LITERAL_09'),
+  T_STR_LITERAL_10: optional('T_STR_LITERAL_10'),
+  T_QUOTE_LITERAL_01: optional('T_QUOTE_LITERAL_01'),
+  T_QUOTE_LITERAL_02: optional('T_QUOTE_LITERAL_02'),
+  T_QUOTE_LITERAL_03: optional('T_QUOTE_LITERAL_03'),
+  T_QUOTE_LITERAL_04: optional('T_QUOTE_LITERAL_04'),
+  T_QUOTE_LITERAL_05: optional('T_QUOTE_LITERAL_05'),
+  T_QUOTE_LITERAL_06: optional('T_QUOTE_LITERAL_06'),
+  T_QUOTE_LITERAL_07: optional('T_QUOTE_LITERAL_07'),
+  T_QUOTE_LITERAL_08: optional('T_QUOTE_LITERAL_08'),
+  T_QUOTE_LITERAL_09: optional('T_QUOTE_LITERAL_09'),
+  T_QUOTE_LITERAL_10: optional('T_QUOTE_LITERAL_10'),
+  T_QUOTE_LITERAL_11: optional('T_QUOTE_LITERAL_11'),
+  T_QUOTE_LITERAL_12: optional('T_QUOTE_LITERAL_12'),
+  T_QUOTE_LITERAL_13: optional('T_QUOTE_LITERAL_13'),
+  T_PREFIX_LITERAL_01: optional('T_PREFIX_LITERAL_01'),
+  T_PREFIX_LITERAL_02: optional('T_PREFIX_LITERAL_02'),
+  T_ACTION_LITERAL_01: optional('T_ACTION_LITERAL_01'),
+  T_ACTION_LITERAL_02: optional('T_ACTION_LITERAL_02'),
+  T_OPID_LITERAL_01: optional('T_OPID_LITERAL_01'),
+  T_OPID_LITERAL_02: optional('T_OPID_LITERAL_02'),
+  T_ROLEID_LITERAL_01: optional('T_ROLEID_LITERAL_01'),
+  T_ROLEID_LITERAL_02: optional('T_ROLEID_LITERAL_02'),
+  T_ROLEID_LITERAL_03: optional('T_ROLEID_LITERAL_03'),
+  T_ROLEID_LITERAL_04: optional('T_ROLEID_LITERAL_04'),
+  T_ROLEID_LITERAL_05: optional('T_ROLEID_LITERAL_05'),
+  T_CHAMBER_LITERAL_01: optional('T_CHAMBER_LITERAL_01'),
+  T_APPARATUS_LITERAL_01: optional('T_APPARATUS_LITERAL_01'),
+  T_APPARATUS_LITERAL_02: optional('T_APPARATUS_LITERAL_02'),
+  T_WING_LITERAL_01: optional('T_WING_LITERAL_01'),
+  T_WING_LITERAL_02: optional('T_WING_LITERAL_02'),
+  T_PROTOCOL_LITERAL_01: optional('T_PROTOCOL_LITERAL_01'),
+  T_PROTOCOL_LITERAL_02: optional('T_PROTOCOL_LITERAL_02'),
+  T_PROTOCOL_LITERAL_03: optional('T_PROTOCOL_LITERAL_03'),
+  T_PROTOCOL_LITERAL_04: optional('T_PROTOCOL_LITERAL_04'),
+  T_PROTOCOL_LITERAL_05: optional('T_PROTOCOL_LITERAL_05'),
+} as const;

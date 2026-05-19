@@ -1,0 +1,39 @@
+{
+  "name": "tricura-challenger",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright + TypeScript QA automation framework for the Iris Sciences Operational Console",
+  "scripts": {
+    "test": "playwright test",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:api": "playwright test --project=api",
+    "test:ui": "playwright test --project=ui",
+    "test:e2e": "playwright test --project=e2e",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui-mode": "playwright test --ui",
+    "report": "playwright show-report",
+    "lint": "eslint src tests playwright.config.ts",
+    "lint:fix": "eslint src tests playwright.config.ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "install:browsers": "playwright install --with-deps chromium"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-playwright": "^2.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
